@@ -31,7 +31,7 @@ body{
   background:linear-gradient(180deg,var(--anchor) 0%,var(--mid) 45%,var(--deep) 100%);
   background-attachment:fixed;background-color:var(--deep);
   color:var(--cream);font-family:'EB Garamond',Georgia,serif;
-  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;
 }
 .wrap{margin:0;padding:0 96px;}
 .read{max-width:none;}
@@ -85,6 +85,18 @@ section{display:flow-root;}
 .callout,.doc,.later,.honest,.panel{display:flow-root;}
 figure.photo{margin:22px 0 8px;}
 figure.fl{float:left;margin:6px 32px 18px 0;}
+.flow{display:flow-root;margin:0 0 64px;}
+.flow section{display:block;margin-bottom:40px;}
+.flow section:last-child{margin-bottom:0;}
+.flow .sec-head,.flow .callout{display:flow-root;}
+.flow figure.fr{margin-top:4px;}
+/* pop up vocab */
+.vocab{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:help;border-bottom:1px dotted var(--gold);line-height:inherit;}
+.vocab:hover,.vocab:focus-visible,.vocab[aria-expanded="true"]{color:var(--gold);outline:none;}
+#pop{position:absolute;z-index:50;width:300px;max-width:calc(100vw - 32px);background:#2b2218;border:1px solid var(--gold);box-shadow:0 10px 30px rgba(0,0,0,0.55);padding:14px 16px 13px;display:none;}
+#pop.on{display:block;}
+#pop h4{font-family:'Oswald',sans-serif;font-weight:400;font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;}
+#pop p{margin:0;font-size:0.96rem;line-height:1.5;}
 figure.fr{float:right;margin:6px 0 18px 32px;}
 .photo-img{width:100%;border:1px solid var(--line);background-size:cover;background-position:center;filter:sepia(0.25) contrast(1.02);}
 .photo-group{aspect-ratio:580/300;background-image:var(--i-group);}
@@ -97,18 +109,6 @@ figure.fr{float:right;margin:6px 0 18px 32px;}
 .chart-wrap figure.photo{margin:0;}
 figcaption{font-style:italic;color:var(--muted);font-size:0.9rem;margin-top:8px;}
 
-/* law 101 */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:18px 0 26px;}
-.step{position:relative;padding:14px 16px 14px;border:1px solid var(--line);background:rgba(255,255,255,0.03);}
-.step + .step{border-left:none;}
-.step-n{font-family:'Oswald',sans-serif;font-weight:200;font-size:1.6rem;color:var(--gold);line-height:1;}
-.step-t{font-family:'Oswald',sans-serif;font-weight:400;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;margin:6px 0 6px;}
-.step p{margin:0;font-size:0.9rem;line-height:1.5;color:rgba(244,242,235,0.85);}
-.step + .step::before{content:"";position:absolute;left:-7px;top:22px;width:12px;height:12px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);transform:rotate(45deg);background:var(--mid);}
-.terms{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-.term{border-top:2px solid var(--gold);background:rgba(255,255,255,0.03);padding:14px 18px;}
-.term h4{font-family:'Oswald',sans-serif;font-weight:400;font-size:0.95rem;letter-spacing:0.05em;margin:0 0 6px;}
-.term p{margin:0;font-size:0.95rem;}
 
 /* supreme court cases */
 .case{border:1px solid var(--line);background:rgba(255,255,255,0.035);padding:24px 26px;}
@@ -144,7 +144,7 @@ figcaption{font-style:italic;color:var(--muted);font-size:0.9rem;margin-top:8px;
 .doc-who{font-family:'Oswald',sans-serif;font-weight:400;font-size:1rem;letter-spacing:0.05em;margin:0;}
 .doc-what{margin:3px 0 0;font-style:italic;color:var(--muted);font-size:0.94rem;}
 .doc-date{font-family:'Oswald',sans-serif;font-weight:200;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin:7px 0 14px;}
-.doc-text{margin:0;padding:0 0 0 16px;border-left:2px solid var(--rust);font-style:italic;font-size:1.2rem;line-height:1.55;}
+.doc-text{margin:0;padding:0 0 0 16px;border-left:3px solid var(--rust);font-style:italic;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.3;padding-left:22px;}
 .doc-src{font-family:'Oswald',sans-serif;font-weight:200;font-size:0.62rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin:12px 0 0;}
 .doc-notice{padding-top:14px;}
 .notice-label{display:inline-block;font-family:'Oswald',sans-serif;font-weight:400;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--deep);background:var(--gold);padding:3px 9px;margin-bottom:8px;}
@@ -196,11 +196,7 @@ footer a:hover{color:var(--gold);}
     linear-gradient(180deg,rgba(34,26,18,0) 62%,var(--anchor) 100%),
     var(--i-mast);}
   .axis .minor{display:none;}
-  .steps{grid-template-columns:1fr 1fr;}
-  .step:nth-child(3){border-left:1px solid var(--line);}
-  .step:nth-child(n+3){border-top:none;}
-  .step:nth-child(3)::before{display:none;}
-  .terms,.two,.case-grid{grid-template-columns:1fr;gap:14px;}
+  .two,.case-grid{grid-template-columns:1fr;gap:14px;}
     .bubble{padding:22px 20px 20px;border-radius:16px;}
   .crow{grid-template-columns:96px minmax(0,1fr);gap:10px;}
   .events{display:none;}
@@ -209,10 +205,6 @@ footer a:hover{color:var(--gold);}
   .bar-end b{font-size:0.7rem;}
 }
 @media (max-width:480px){
-  .steps{grid-template-columns:1fr;}
-  .step{border-left:1px solid var(--line) !important;}
-  .step + .step{border-top:none;}
-  .step::before{display:none !important;}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none !important;}}
 </style>
@@ -227,7 +219,7 @@ footer a:hover{color:var(--gold);}
 
 <div class="wrap">
 
-<div class="howto read"><p>Watch the video first. Then read this page from top to bottom. It tells the whole story in order, and it explains the law parts in plain English, so you do not need to know anything about courts to follow it.</p>
+<div class="howto read"><p>Watch the video first. Then read this page from top to bottom. It tells the whole story in order. Any word with a dotted gold underline is a legal term: click or tap it for a plain English definition.</p>
 <p>Keep this page open in a second tab while you answer your ten questions.</p></div>
 
 <section id="watch">
@@ -237,19 +229,23 @@ footer a:hover{color:var(--gold);}
 
 </section>
 
+<div class="flow">
+<figure class="photo fr" style="width:42%"><div class="photo-img photo-nine" role="img" aria-label="The nine under armed guard, with their lawyer Samuel Leibowitz seated in front. Morgan County Archives."></div><figcaption>The nine under armed guard, with their lawyer Samuel Leibowitz seated in front. Morgan County Archives.</figcaption></figure>
 <section id="rails" class="read">
 <div class="sec-head"><p class="kicker">Part 1 &nbsp;&middot;&nbsp; March 25, 1931</p><h2>Riding the Rails</h2></div>
-<figure class="photo fr" style="width:34%"><div class="photo-img photo-nine" role="img" aria-label="The nine under armed guard, with their lawyer Samuel Leibowitz seated in front. Morgan County Archives."></div><figcaption>The nine under armed guard, with their lawyer Samuel Leibowitz seated in front. Morgan County Archives.</figcaption></figure>
 <p>The Great Depression is two years old. Millions of Americans have no job and no money for a ticket, so they do something illegal but common: they hop onto freight trains and ride from town to town looking for work.</p>
 <p>On March 25, 1931, a freight train pulls out of Chattanooga, Tennessee, heading into Alabama. Riding on it are nine young Black men and teenagers. Most of them do not know each other. The youngest is twelve or thirteen. The oldest is nineteen or twenty.</p>
 <p>A fight breaks out between some of the Black teens and a group of white teens riding the same train. The white teens lose and get pushed off. They walk back to the last station and report the fight. The stationmaster phones ahead.</p>
 <p>At the tiny town of <b>Paint Rock, Alabama</b>, a posse of armed white men stops the train and pulls off every Black rider they can find. Two young white women climb out of a boxcar too: <b>Victoria Price</b>, about twenty one, and <b>Ruby Bates</b>, seventeen. Within minutes, they say the nine raped them.</p>
-</section><section id="danger" class="read">
+</section>
+<section id="danger" class="read">
 <div class="sec-head"><p class="kicker">Part 2</p><h2>Why That Accusation Was So Dangerous</h2></div>
 <p>You need to understand what that accusation meant in the South in 1931. This is the Jim Crow era. A white woman accusing a Black man of rape was treated as proof. Black men accused of it were often lynched, which means killed by a mob without any trial at all.</p>
 <p>The nine were locked in the jail in <b>Scottsboro</b>, the county seat, which is how they got their name. That night a mob gathered outside the jail. The governor of Alabama sent the National Guard to keep the mob from breaking in. The nine would get a trial. The question was whether it would be anything more than a lynching with paperwork.</p>
 <div class="callout"><span class="lab">So why did they lie?</span><p>Price and Bates were poor mill workers from Huntsville who had crossed a state line on a freight train with men. They could have been arrested for vagrancy, which means wandering with no job or home, or under a federal law called the Mann Act, which made it a crime to cross state lines for "immoral purposes." Accusing someone else moved the danger off of them and onto nine strangers. The video explains this starting around the three minute mark.</p></div>
-</section><section id="evidence" class="read">
+</section>
+</div>
+<section id="evidence" class="read">
 <div class="sec-head"><p class="kicker">Part 3</p><h2>What the Evidence Actually Showed</h2></div>
 <p>About ninety minutes after the train stopped, a local doctor, <b>Dr. R. R. Bridges</b>, examined both women. He found no injuries that fit their story. He described them as calm, not upset. If two women had just been attacked by nine people on a moving train, that is not what a doctor would find.</p>
 <p>Later, when the defense team finally rebuilt the train car by car, they showed that many of the nine were not even in the same car as the women. Some of them said they never saw the women at all until Paint Rock.</p>
@@ -284,21 +280,15 @@ footer a:hover{color:var(--gold);}
 <div class="later"><p>Scottsboro taught the NAACP a hard lesson about waiting. In 1940 it created the <b>NAACP Legal Defense Fund</b>, led by Thurgood Marshall, to take on these cases full time. Fourteen years later that team won <i>Brown v. Board of Education</i>.</p></div></div>
 </section>
 
-<section id="law">
-<div class="sec-head"><p class="kicker">Before the next part</p><h2>Law 101</h2><p class="sec-sub">Almost everything that happened next happened in courtrooms. Here is what you need to know to follow it. Nothing more.</p></div>
-<div class="steps"><div class="step"><div class="step-n">1</div><div class="step-t">Trial</div><p>A judge and a jury hear the case. The jury decides guilty or not guilty. In Alabama in the 1930s, every jury was all white.</p></div><div class="step"><div class="step-n">2</div><div class="step-t">Appeal</div><p>The losing side asks a higher court to check whether the trial was done fairly. The higher court does not hold a new trial. It looks for mistakes.</p></div><div class="step"><div class="step-n">3</div><div class="step-t">State Supreme Court</div><p>The highest court in Alabama. For the Scottsboro Boys, it kept upholding the convictions.</p></div><div class="step"><div class="step-n">4</div><div class="step-t">U.S. Supreme Court</div><p>The highest court in the country. It can overturn a conviction if a state broke the Constitution. That sends the case back for a brand new trial.</p></div></div>
-<div class="terms"><div class="term"><h4>The 14th Amendment</h4><p>Added after the Civil War to protect formerly enslaved people. It says no state can take away a person's life, liberty, or property without <b>due process</b>, and no state can deny anyone <b>equal protection</b> of the law.</p></div><div class="term"><h4>Due process</h4><p>Fair treatment by the justice system at every step. Think of it as: the state has to play by the rules before it can punish you.</p></div><div class="term"><h4>Equal protection</h4><p>The law has to treat everyone the same. A state cannot run one justice system for white people and a different one for Black people.</p></div><div class="term"><h4>Overturn and retrial</h4><p>When a higher court throws out a conviction, the person is not automatically free. The state can put them on trial again. Alabama did this over and over.</p></div></div>
-</section>
-
 <section id="powell">
 <div class="sec-head"><p class="kicker">The first big win</p><h2>The Supreme Court Steps In</h2></div>
 <article class="case">
 <div class="case-top"><p class="case-name">Powell v. Alabama</p><span class="case-date">November 1932</span></div>
 <p class="case-right">The right to a real lawyer</p>
 <div class="case-grid">
-<div><h4>What happened</h4><p>The International Labor Defense appealed the first convictions all the way to the U.S. Supreme Court. The case is named after one defendant, Ozie Powell.</p></div>
-<div><h4>What the Court said</h4><p>The Court said the nine had been denied <b>due process</b>. Being handed two unprepared lawyers the morning of a trial where your life is at stake is not a real defense. The convictions were thrown out.</p></div>
-<div><h4>Why it still matters</h4><p>This was one of the first times the Supreme Court said the 14th Amendment requires a state to give a defendant a real lawyer. Years later, in <b>Gideon v. Wainwright</b> (1963), the Court built on it: anyone charged with a serious crime gets a lawyer, even if they cannot pay. It is part of the reason police today tell people under arrest that if they cannot afford a lawyer, one will be provided.</p></div>
+<div><h4>What happened</h4><p>In 1932 the <button type="button" class="vocab" data-k="statesc" aria-expanded="false">Alabama Supreme Court</button> upheld the death sentences. So the International Labor Defense <button type="button" class="vocab" data-k="appeal" aria-expanded="false">appealed</button> all the way to the <button type="button" class="vocab" data-k="scotus" aria-expanded="false">U.S. Supreme Court</button>. The case is named after one defendant, Ozie Powell.</p></div>
+<div><h4>What the Court said</h4><p>The Court said the nine had been denied <button type="button" class="vocab" data-k="dp" aria-expanded="false">due process</button>. Being handed two unprepared lawyers the morning of a trial where your life is at stake is not a real defense. The convictions were <button type="button" class="vocab" data-k="overturn" aria-expanded="false">thrown out</button>.</p></div>
+<div><h4>Why it still matters</h4><p>This was one of the first times the Supreme Court said the <button type="button" class="vocab" data-k="fourteenth" aria-expanded="false">14th Amendment</button> requires a state to give a defendant a real lawyer. Years later, in <b>Gideon v. Wainwright</b> (1963), the Court built on it: anyone charged with a serious crime gets a lawyer, even if they cannot pay. It is part of the reason police today tell people under arrest that if they cannot afford a lawyer, one will be provided.</p></div>
 </div>
 </article>
 </section>
@@ -326,7 +316,7 @@ footer a:hover{color:var(--gold);}
 <p class="case-right">The right to a jury that includes people like you</p>
 <div class="case-grid">
 <div><h4>What happened</h4><p>Named after defendant Clarence Norris. His lawyer, Samuel Leibowitz, proved that no Black person had served on a jury in that county in living memory. Some Black names had been written onto the jury list after the fact, to make it look like they had been considered.</p></div>
-<div><h4>What the Court said</h4><p>The Court said keeping Black citizens off juries because of their race violates <b>equal protection</b>. The convictions were thrown out again.</p></div>
+<div><h4>What the Court said</h4><p>The Court said keeping Black citizens off juries because of their race violates <button type="button" class="vocab" data-k="ep" aria-expanded="false">equal protection</button>. The convictions were <button type="button" class="vocab" data-k="overturn" aria-expanded="false">thrown out</button> again.</p></div>
 <div><h4>Why it still matters</h4><p>It established that a jury picked by shutting out a whole race is not a fair jury. Later cases, like <b>Batson v. Kentucky</b> (1986), extended the idea: lawyers cannot strike jurors because of their race.</p></div>
 </div>
 </article>
@@ -362,6 +352,52 @@ footer a:hover{color:var(--gold);}
 </div>
 
 <footer>Mr. Huebner &nbsp;&middot;&nbsp; Blue Valley Academy &nbsp;&middot;&nbsp; <a href="index.html">Back to units</a></footer>
+
+<div id="pop" role="dialog" aria-live="polite"><h4 id="pop-t"></h4><p id="pop-d"></p></div>
+<script>
+const VOCAB = {"appeal": ["Appeal", "Asking a higher court to check whether a trial was done fairly. The higher court does not hold a new trial. It looks for mistakes."], "statesc": ["State Supreme Court", "The highest court in a state. For the Scottsboro Boys, Alabama's kept upholding the convictions."], "scotus": ["U.S. Supreme Court", "The highest court in the country. It can overturn a conviction if a state broke the Constitution."], "fourteenth": ["The 14th Amendment", "Added after the Civil War to protect formerly enslaved people. No state can take away a person's life, liberty, or property without due process, and no state can deny anyone equal protection of the law."], "dp": ["Due process", "Fair treatment by the justice system at every step. The state has to play by the rules before it can punish you."], "ep": ["Equal protection", "The law has to treat everyone the same. A state cannot run one justice system for white people and a different one for Black people."], "overturn": ["Overturned", "A higher court throws out the conviction. The person is not automatically free. The state can put them on trial again, and Alabama did, over and over."]};
+const pop = document.getElementById('pop');
+let openBtn = null, pinned = false;
+function place(btn){
+  const r = btn.getBoundingClientRect();
+  pop.style.left = '0px'; pop.style.top = '0px';
+  const w = pop.offsetWidth, h = pop.offsetHeight;
+  let x = r.left + r.width / 2 - w / 2;
+  x = Math.max(16, Math.min(x, document.documentElement.clientWidth - w - 16));
+  let y = r.bottom + 8;
+  if (y + h > window.innerHeight - 8 && r.top - h - 8 > 0) y = r.top - h - 8;
+  pop.style.left = (x + window.scrollX) + 'px';
+  pop.style.top = (y + window.scrollY) + 'px';
+}
+function show(btn){
+  const v = VOCAB[btn.dataset.k];
+  document.getElementById('pop-t').textContent = v[0];
+  document.getElementById('pop-d').textContent = v[1];
+  if (openBtn && openBtn !== btn) openBtn.setAttribute('aria-expanded', 'false');
+  openBtn = btn; btn.setAttribute('aria-expanded', 'true');
+  pop.classList.add('on'); place(btn);
+}
+function hide(){
+  pop.classList.remove('on'); pinned = false;
+  if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+  openBtn = null;
+}
+const fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+document.querySelectorAll('.vocab').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    if (openBtn === btn && pinned) { hide(); return; }
+    show(btn); pinned = true;
+  });
+  if (fine) {
+    btn.addEventListener('mouseenter', () => { if (!pinned) show(btn); });
+    btn.addEventListener('mouseleave', () => { if (!pinned) hide(); });
+  }
+});
+document.addEventListener('click', e => { if (!pop.contains(e.target)) hide(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+window.addEventListener('resize', () => { if (openBtn) place(openBtn); });
+</script>
 
 </body>
 </html>
